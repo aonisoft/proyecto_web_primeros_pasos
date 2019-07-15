@@ -1,24 +1,36 @@
 <?php
 
 require_once "./nucleo/controladores/controlador.php";
-
-class CInicio implements Controlador {
-
-    
-    public function accionar(Evento $ev=null): String
+require_once "./models/Articulo.php";
+class CSite implements Controlador
+{
+    private $param = null;
+    public function accionar(Evento $ev = null): IVista
     {
-        return  "<h1>Estoy desde el controlador</h1>";
+        $accion = $ev->getAccion();
+        $this->param = $ev->getDatos();
+       return  $this->$accion();
     }
 
-    public function archivo(): Archivo
+    public function index()
     {
+        $ultimos = Articulos::listarUltimos();
+        $articulos = Articulos::listar();
+        $lugares = Lugar::listar();
+
+        $vista = new VIndex([
+            'articulos' => $articulos,
+            'lugares' => $lugares,
+            'ultimos' => $ultimos
+        ]);
+        
+        return $vista;
     }
 
-    public function allJson(): Json
+    public function contacto()
     {
+      
     }
 
-    public function dataJson(String $selector): Json
-    {
-    }
+   
 }

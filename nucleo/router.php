@@ -42,7 +42,7 @@ class Router implements IRouter{
             return  $_POST;
         
         if (REQUEST_METHOD === 'GET')
-            return !empty($this->uri[3]) ? $this->uri[3] : '';
+            return !empty($this->uri[3]) ? $this->uri[3] : [];
 
         return [];
     }
