@@ -1,8 +1,8 @@
 <?php
 
-require_once "./nucleo/eventos/evento.php";
-require_once "./nucleo/controladores/controlador.php";
-require_once "./nucleo/iRouter.php";
+require_once "../nucleo/eventos/evento.php";
+require_once "../nucleo/controladores/controlador.php";
+require_once "../nucleo/iRouter.php";
 
 
 class Router implements IRouter{

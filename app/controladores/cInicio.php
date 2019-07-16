@@ -1,6 +1,6 @@
 <?php
 
-require_once "./nucleo/controladores/controlador.php";
+require_once "../nucleo/controladores/controlador.php";
 
 class CInicio implements Controlador {
 
