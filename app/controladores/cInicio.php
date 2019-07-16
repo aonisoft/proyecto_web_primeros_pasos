@@ -1,11 +1,15 @@
 <?php
 
-require_once "./nucleo/controladores/controlador.php";
-require_once "./models/Articulo.php";
-class CSite implements Controlador
-{
-    private $param = null;
-    public function accionar(Evento $ev = null): IVista
+require_once "../nucleo/controladores/controlador.php";
+require_once "../nucleo/iVista.php";
+require_once "../models/Articulo.php";
+
+
+class CInicio implements Controlador {
+
+    private $param = null;    
+    public function accionar(Evento $ev=null): IVista
+
     {
         $accion = $ev->getAccion();
         $this->param = $ev->getDatos();
