@@ -19,8 +19,9 @@ $inicio = new CInicio();
 
 $GLOBALS["control"]= [
     "" => $inicio,
-    "inicio" => $inicio,
-    "home" => new CInicio()
+    //"inicio" => $inicio,
+    //"home" => new CInicio()
+    //"articulo" => new CArticulo()
 ];
 
 $EVENTOS = [];

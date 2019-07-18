@@ -5,23 +5,18 @@ class UtilesVista
     {
         try {
             ExceptionEspecial::estaSeteada($datos);
-        
+            //echo $datos['url_vista'];
             $html = file_get_contents($datos['url_vista']);
                                 
             foreach ($datos['contenidos'] as $variable) {                
                 $html = str_replace($variable[0], $variable[1], $html);
             }
-
         } catch (Exception $ex) {
             if (DEBUG_DEVELOP) {
                 echo $ex->getMessage();
             }
             $html = "";
         }
-
         return $html;
     }
-    
-    
 }
-

@@ -2,7 +2,8 @@
 
 require_once "../nucleo/controladores/controlador.php";
 require_once "../nucleo/iVista.php";
-require_once "../models/Articulo.php";
+include_once "../app/models/articulo.php";
+include_once "../vistas/site/index/index.php";
 
 
 class CInicio implements Controlador {
@@ -18,14 +19,12 @@ class CInicio implements Controlador {
 
     public function index()
     {
-        $ultimos = Articulos::listarUltimos();
-        $articulos = Articulos::listar();
-        $lugares = Lugar::listar();
+        //$ultimos = Articulos::listarUltimos();
+        $articulos = Articulo::listar();
+        //$lugares = Lugar::listar();
 
         $vista = new VIndex([
             'articulos' => $articulos,
-            'lugares' => $lugares,
-            'ultimos' => $ultimos
         ]);
         
         return $vista;
@@ -35,6 +34,4 @@ class CInicio implements Controlador {
     {
       
     }
-
-   
 }
