@@ -1,36 +1,28 @@
 <?php
 class VIndex implements IVista
 {
-    private $raiz_vista = "../vistas/site/index/";
+    private static $raiz_vista = "../vistas/site/index/";
     private $datos_remplazo;
     private $param;
+    private $articulo_url;
+    private $seccion_url;
 
-    private $estruct_articulo = array();
+    //    private $url_vista =[self::$raiz_vista];
+                       //[ 'articulo' => self:: $raiz_vista . "_articulo.html",  'seccion' => self:: $raiz_vista . "_seccion.html" ];
 
-    public function getEstilos()
-    { }
 
-    public function getScripts()
-    { }
-    public function __construct(array $param)
+    public function __construct(array $param = [])
     {
         $this->param = isset($param) ? $param : [];
-        $this->datos_remplazo =
-            [
-                'url_vista' =>
-                [
-                    'articulo' => $this->raiz_vista . "_articulo.html",
-                    'seccion' => $this->raiz_vista . "_seccion.html"
-                ]
-            ];
+
+        
+        $this-> articulo_url = self::$raiz_vista . "_articulo";
+        
         $this->estruct_articulo = [
             'vista' => $this->datos_remplazo['url_vista']['articulo'],
             'contenidos' => [
                 [
                     '{{col}}', "col-sm-4",
-                    //['{{url}}', $art->getValor("url")],
-                    //['{{url_imagen}}', $art->getValor("imagen")],
-                    //['{{descripcion_imagen}}', $art->getValor("nombre")],
                     '{{url}}', "probando",
                     '{{url_imagen}}', "defecto.jpg",
                     '{{descripcion_imagen}}', "esto_es_una_imagen",
@@ -62,7 +54,7 @@ class VIndex implements IVista
         $articulos = $this->param['articulos'];
         $html = "";
         $url_vista_articulo = $this->datos_remplazo['url_vista']['articulo'];
-        echo $url_vista_articulo;
+        
         foreach ($articulos as $articulo) {
             $html .= UtilesVista::reemplazar(
                 [
@@ -72,7 +64,10 @@ class VIndex implements IVista
                         ['{{url}}', $articulo['url']],
                         ['{{ruta_imagen}}', 'public/files/articulo/1/articulo.jpg'],
                         ['{{descripcion_imagen}}', "probando algo"],
-                        ['{{contenido}}', "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae iusto fugit molestias nulla sapiente dolorum a fugiat laboriosam tenetur, voluptatem unde. Porro soluta saepe perspiciatis, totam perferendis odio. Labore, commodi."]
+                        ['{{contenido}}', "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                                           Recusandae iusto fugit molestias nulla sapiente dolorum a fugiat 
+                                           laboriosam tenetur, voluptatem unde. Porro soluta saepe perspiciatis, 
+                                           totam perferendis odio. Labore, commodi."]
                     ]
                 ]
             );
@@ -80,14 +75,19 @@ class VIndex implements IVista
         return $html;
     }
 
+    
     public function mostrar(): String
     {
-        $html_index = "";
-        $html_index .= $this->header;
-        $html_index .= $this->crearSeccion();
-        $html_index .= $this->footer;
-        return $html_index;
+        return $this->crearSeccion();
     }
+
+    
+    public function getEstilos(): String
+    { }
+
+    public function getScripts(): String
+    { }
+
 
     //foreach ($articulos as $articulo) { }
 
