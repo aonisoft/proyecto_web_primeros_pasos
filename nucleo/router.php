@@ -36,10 +36,9 @@ class Router implements IRouter
     {
         if (!isset($this->url[2])) {
             $this->url[2] = "index";
-            return new Evento("index", $this->getDatos());
-        } else {
-            return new Evento($this->url[2], $this->getDatos());
         }
+        
+        return new Evento($this->url[2], $this->getDatos());
     }
 
 

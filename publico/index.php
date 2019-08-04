@@ -18,3 +18,12 @@ $vista = ( $contr-> accionar($evento));
 
 echo $vista->mostrar();
 
+/*
+Esto es un posible escenario, de como integrar los estilos especiales.
+...
+$contenido_vista = $vista->mostrar();
+$plt = new Plantilla($vista-> getEstilos(), $vista-> getScript());
+$html_final = $plt-> rellenar($contenido_vista);
+echo ($html_final);
+...
+*/

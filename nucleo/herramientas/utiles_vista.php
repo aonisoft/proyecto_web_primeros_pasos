@@ -5,7 +5,7 @@ class UtilesVista
     {
         try {
             ExceptionEspecial::estaSeteada($datos);
-            //echo $datos['url_vista'];
+            
             $html = file_get_contents($datos['url_vista']);
                                 
             foreach ($datos['contenidos'] as $variable) {                
