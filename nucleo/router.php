@@ -52,8 +52,7 @@ class Router implements IRouter{
     {
         $temp = substr($_SERVER['REQUEST_URI'], 1);
         
-        $this-> url = explode('/', $temp);
-        
+       $this-> url = explode('/', $temp);
     }
 
 }
