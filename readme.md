@@ -29,16 +29,16 @@ De esta forma, se tiene un mejor flujo de trabajo.
 
 # Comandos utiles
 
-- git fetch *Para actualizar repositorio en computadora propia*
+- git fetch :: *Para actualizar repositorio en computadora propia*
 
-- git merge *Para fucionar una rama con otra*
+- git merge :: *Para fucionar una rama con otra*
 
-- git remote -a -v *Para mostrar todas las direcciones de los repositorios remotos*
+- git remote -a -v :: *Para mostrar todas las direcciones de los repositorios remotos*
 
-- git remote add *nombre identificador* *direccion* 
-  *Para agregar un repositorio externo*
+- git remote add *"nombre identificador"* *"direccion"* :: 
+*Para agregar un repositorio externo*
   
-- git log *Muestras los commits realizados en la rama actual*
+- git log :: *Muestras los commits realizados en la rama actual*
 
 - git --all 
 
