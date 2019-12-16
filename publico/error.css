@@ -1,0 +1,31 @@
+body {
+  font: 12px "Helvetica Neue", helvetica, arial, sans-serif;
+  color: #131313;
+  background: #333;
+  text-align: center;
+
+  text-rendering: optimizeLegibility;
+}
+
+.color-font-error{
+  color: #e95353
+  /* color: #ef7c61;*/
+}
+
+.color-font-w {
+  color: white;
+}
+
+.color-font-mensaje {
+  color: #4bb1b1;
+}
+
+.color-font-trace {
+  color: #BCD42A;
+}
+
+.color-font-otros {
+  color: #e9e4e5;
+}
+
+

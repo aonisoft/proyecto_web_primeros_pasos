@@ -1,10 +1,5 @@
 <?php
 
-require_once "../nucleo/eventos/evento.php";
-require_once "../nucleo/controladores/controlador.php";
-require_once "../nucleo/iRouter.php";
-
-
 class Router implements IRouter{
 
     private  $url /* array String */;
@@ -15,18 +10,18 @@ class Router implements IRouter{
     {
         if(self::$myRouter == null)
             self::$myRouter =new Router();
-               
+
         return self::$myRouter;
     }
 
     
-    private function __construct(){
-    }
+    private function __construct(){}
 
     
     public function getControlador(): Controlador
-    {           
-        return $GLOBALS["control"][$this-> url[0]];
+    {
+        $this->setURL();
+        return $GLOBALS["control"][$this-> url[0]];        
     }
 
     
@@ -38,17 +33,17 @@ class Router implements IRouter{
     
     private function getDatos(): array
     {
-        if(REQUEST_METHOD === 'POST')
+        if($REQUEST_METHOD === 'POST')
             return  $_POST;
         
-        if (REQUEST_METHOD === 'GET')
+        if ($REQUEST_METHOD === 'GET')
             return !empty($this->uri[3]) ? $this->uri[3] : '';
 
         return [];
     }
 
     
-    public function setURL(): void
+    private function setURL(): void
     {
         $temp = substr($_SERVER['REQUEST_URI'], 1);
         

@@ -1,17 +1,18 @@
 <?php
 
-require_once "../app/controladores/cInicio.php";
-require_once "../configuraciones/rutas.php";
-require_once "../nucleo/router.php";
+require_once "../nucleo/hadleExceptions.php";
+
 require_once "../nucleo/eventos/evento.php";
+require_once "../nucleo/kernel.php";
+require_once "../nucleo/iRouter.php";
+
+require_once "../app/controladores/cInicio.php";
+require_once "../app/router.php";
+
+require_once "../config/rutas.php";
 
 
-$ru =  Router::getRouter();
+$kerInicio =  new Kernel();
 
-$ru -> setURL();
-
-
-$contr = $ru->getControlador();
-
-echo( $contr-> accionar());
+$kerInicio-> ejecutar();
 
