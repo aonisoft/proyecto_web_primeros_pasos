@@ -27,16 +27,21 @@ class Router implements IRouter{
     
     public function getEvento(): Evento
     {
-        return new Evento($this->url[2], $this-> getDatos());    
+        return new Evento($this->getAccion(), $this-> getDatos());    
     }
 
+
+    private function getAccion(): String
+    {
+        return (count($this->url)>1)? $this->url[2]: "";
+    }
     
     private function getDatos(): array
     {
-        if($REQUEST_METHOD === 'POST')
+        if($_POST)
             return  $_POST;
         
-        if ($REQUEST_METHOD === 'GET')
+        if ($_GET)
             return !empty($this->uri[3]) ? $this->uri[3] : '';
 
         return [];
