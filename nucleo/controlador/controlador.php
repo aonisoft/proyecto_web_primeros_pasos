@@ -1,10 +1,12 @@
 <?php
-    
+
+namespace nucleo\controlador;
+use nucleo\controlador\Evento;
+use \Json;
+
 interface Controlador {
     
     function accionar(Evento $ev): String;
-
-    function archivo(): Archivo;
 
     function allJson(): Json;
 

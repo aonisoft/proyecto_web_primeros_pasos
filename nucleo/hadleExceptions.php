@@ -1,5 +1,4 @@
 <?php
-
 define('ARCHIVO', "../nucleo/errores/vista/error.html");
 
 define('NOMBRES',["mensaje", "trace", "code", "file", "linea"]);

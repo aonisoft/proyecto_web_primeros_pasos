@@ -1,5 +1,11 @@
 <?php
 
+namespace app;
+
+use nucleo\IRouter;
+use nucleo\controlador\Controlador;
+use nucleo\controlador\Evento;
+
 class Router implements IRouter{
 
     private  $url /* array String */;
@@ -27,16 +33,17 @@ class Router implements IRouter{
     
     public function getEvento(): Evento
     {
-        return new Evento($this->url[2], $this-> getDatos());    
+        $accion= (count($this->url)>1)? $this->url[2]: null;
+        return new Evento($accion, $this-> getDatos());    
     }
 
     
     private function getDatos(): array
     {
-        if($REQUEST_METHOD === 'POST')
+        if($_POST)
             return  $_POST;
         
-        if ($REQUEST_METHOD === 'GET')
+        if ($_GET)
             return !empty($this->uri[3]) ? $this->uri[3] : '';
 
         return [];
@@ -45,7 +52,7 @@ class Router implements IRouter{
     
     private function setURL(): void
     {
-        $temp = substr($_SERVER['REQUEST_URI'], 1);
+       $temp = substr($_SERVER['REQUEST_URI'], 1);
         
        $this-> url = explode('/', $temp);
     }
