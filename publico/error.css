@@ -20,8 +20,15 @@ body {
   color: #4bb1b1;
 }
 
+.pos {
+  background-color: dimgrey;
+  margin-left: 32%;
+  margin-right: 25%;
+}
+
 .color-font-trace {
   color: #BCD42A;
+  text-align: left;
 }
 
 .color-font-otros {

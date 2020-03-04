@@ -1,19 +1,28 @@
 <?php
+
+use function utiles\comunes\showToString;
+
 define('ARCHIVO', "../nucleo/errores/vista/error.html");
 
 define('NOMBRES',["mensaje", "trace", "code", "file", "linea"]);
 
+function __getTrace(Throwable $e) : String 
+{
+   return showToString(str_replace("#", "\n", $e->getTraceAsString()));   
+}
 
 function __toArray(Throwable $e): array
 {
     return [
         "mensaje"=>$e->getMessage(),
-        "trace"=>$e->getTraceAsString(),
+        "trace"=>__getTrace($e),
         "code"=>$e->getCode(),
         "file"=>$e->getFile(),
         "linea"=>$e->getLine()
     ];
 }
+
+
 
 function __cambio(Throwable $e): String
 {

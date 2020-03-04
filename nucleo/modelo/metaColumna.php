@@ -1,6 +1,6 @@
 <?php
 
-namespace modelo\metaColumnas;
+namespace modelo;
 
 /*Verlo como un struct*/
 

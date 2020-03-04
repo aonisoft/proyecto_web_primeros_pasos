@@ -2,8 +2,10 @@
 
 namespace modelo;
 
-use function modelo\utiles\toArrayString as toArrayString;
+use function utiles\comunes\toArrayString;
+use function  utiles\comunes\str_space;
 use Closure;
+
 
 class Condicion {
 
@@ -11,17 +13,18 @@ class Condicion {
 
     public static function getBetween(String $col, String $ini, String $fin): Condicion
     {
-        return new Condicion("( ". $col, "between", $ini . " and ". $fin . " )");
+        return (new Condicion())->init($col, KWSQL["bt"], $ini . str_space(KWSQL['and']) . $fin);
     }
 
     public static function getLike(String $col, String $patron) : Condicion
     {
-        return new Condicion($col, "like", $patron);
+        return (new Condicion)->init($col, KWSQL["like"], $patron);
     }
     
-    public function __construct(String $key="", String $ope="", String $val="")
+    public function init(String $key="", String $ope="", String $val=""): Condicion
     {
-        $this->unir($key, $ope, $val)("");        
+        $this->unir($key, $ope, $val)("");   
+        return $this;
     }
 
     private function unir (String $key, String $ope, String $val) : Closure
@@ -32,7 +35,7 @@ class Condicion {
             {
                 $this->condicion[] = $opeLogico;
                 
-                $this->condicion[] = $key ." ". $ope ." " . $val;
+                $this->condicion[] = $key . str_space( $ope) . $val;
             }
         };
     }
@@ -57,51 +60,64 @@ class Condicion {
         return !($key === "" or $ope === "" or $val === "");
     }
 
-    public function and(String $clave, String $operador, String $valor): void
+    public function and(String $clave, String $operador, String $valor): Condicion
     {
         if($this->hadCond())
-            $this->unir($clave, $operador, $valor)("and");
+            $this->unir($clave, $operador, $valor)(KWSQL['and']);
+        
+        return $this;
     }
 
-    public function or(String $clave, String $operador, String $valor): void
+    public function or(String $clave, String $operador, String $valor): Condicion
     {
         if($this->hadCond())
-           $this->unir($clave, $operador, $valor)("or");
+           $this->unir($clave, $operador, $valor)(KWSQL['or']);
+        
+        return $this;
     }
 
-    public function not(String $clave, String $operador, String $valor): void 
+    public function not(String $clave, String $operador, String $valor): Condicion 
     {
-        $this->unir("(".$clave, $operador, $valor.")")("not");
+        $this->unir("(".$clave, $operador, $valor.")")(KWSQL['not']);
+
+        return $this;
     }
 
-    public function andCondicion(Condicion $andCond): void
-    {
-        $this->unirCond($andCond)("and");
+    public function andCondicion(Condicion $andCond): Condicion
+    {       
+        $this->unirCond($andCond)(KWSQL['and']);
+
+        return $this;
     }
 
-    public function orCondicion(Condicion $orCond): void
+    public function orCondicion(Condicion $orCond): Condicion
     {
-        $this->unirCond($orCond)("or");
+        $this->unirCond($orCond)(KWSQL['or']);
+
+        return $this;
     }
 
-    public function notCondicion(Condicion $notCond): void
+    public function notCondicion(Condicion $notCond): Condicion
     {
-        $this->unirCond($notCond)("not");
+        $this->unirCond($notCond)(KWSQL['not']);
+
+        return $this;
     }
 
     public function get(): String
     {
         return toArrayString($this->condicion);
+
     }
 
     public function getArray(): array
     {
-        return $this->condicion;
+        return $this->condicion;        
     }
 
     public function hadCond(): bool
     {
-        return !($this->condicion === []);
+        return !($this->condicion == []);
     }
 }
 

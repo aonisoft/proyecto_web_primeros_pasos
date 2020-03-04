@@ -2,64 +2,25 @@
 
 namespace modelo\utiles;
 
-use Closure;
+use function utiles\comunes\str_space;
+use function utiles\comunes\str_phsis;
 
-
-function cambiar (String $valor, String $remplaso ) : Closure
+function as_(String $original, String $alias) : String
 {
-      return function (String $e) use ($valor, $remplaso)
-      {
-         return ($e === $valor)? $remplaso : $e;
-      };
+    return $original . str_space(KWSQL["as"]) . $alias;
 }
 
-
-//Pensada para utilizar en la funcion reduce.
-function concatenar(String $intermedio) : Closure
+function sum(String $columna) : String 
 {
-      return function ($carry, $item) use ($intermedio) : String
-      {
-          return $carry . $intermedio . strval($item);
-      };
+    return KWSQL["sum"] . str_phsis($columna);
 }
 
-
-function concatenarArray($intermedio) : Closure
+function avg(String $columna) : String 
 {
-    return function($carry, $item) use($intermedio)
-    {
-        $carry[] = $intermedio;
-        $carry[] = $item;
-    };
-               
+    return KWSQL["avg"] . str_phsis($columna);
 }
 
-function array_last(array $a)
+function count(String $col) : String
 {
-    end($a);
-    return key($a);
+    return KWSQL['count'] . str_phsis($col);
 }
-
-
-function array_zip(array $origin, $elementDivisor) : array
-{
-    $newZip = [];
-   
-    foreach($origin as $key => $elem)
-    {
-        $newZip[] = $elem;
-        $newZip[] = ($key === array_last($origin))? "": $elementDivisor;
-    }
-    return $newZip;
-}
-
-
-function toArrayString (array $a) : String 
-{
-    $temp = array_reduce($a, concatenar(" "));
-    return is_null($temp)? "" : $temp;
-}
-
-
-
-

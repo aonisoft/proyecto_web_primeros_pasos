@@ -1,0 +1,21 @@
+<?php
+
+$rutas = ["../config/handle.php"
+,"../nucleo/utiles/comunes.php"
+,"../nucleo/hadleExceptions.php"
+, "../nucleo/controlador/evento.php"
+, "../nucleo/kernel.php"
+, "../nucleo/iRouter.php"
+, "../nucleo/modelo/sql.php"
+, "../nucleo/modelo/utiles.php"
+, "../nucleo/modelo/fabrica.php"
+, "../nucleo/modelo/metaColumna.php"
+, "../nucleo/modelo/join.php"
+, "../nucleo/modelo/condicion.php"
+, "../nucleo/modelo/crud.php"
+, "../nucleo/modelo/select.php"
+, "../nucleo/controlador/controlador.php"
+, "../app/controladores/cInicio.php"
+, "../app/router.php"
+, "../config/rutas.php"
+];
